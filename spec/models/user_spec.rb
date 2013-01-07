@@ -1,13 +1,5 @@
 require 'spec_helper'
 
-FactoryGirl.define do
-  factory :user do
-    name "Stas"
-    email "stas@gmail.com"
-    password "abc123"
-  end
-end
-
 describe User do
   context 'association/validation' do
     it { should belong_to(:account) }
@@ -21,21 +13,28 @@ describe User do
     it { should validate_uniqueness_of(:email) }
   end
 
-  context 'bcrypt methods' do
-    describe 'authentication' do
-      it 'return the user if credentials match' do
-        user_init = FactoryGirl.create(:user, name: "John", email: "john@gmail.com", password: "12345")
-        result = User.authentication(user_init.email, user_init.password)
-        result.should eql(user_init)
-      end
-      it 'return nil if the credentials do not match' do
-        user_init = FactoryGirl.create(:user, name: "John", email: "john@gmail.com", password: "12345")
-        result = User.authentication(user_init.email, "non-matching-password")
-        result.should be(nil)
-      end
-    end
-
-    describe 'encrypt password' do
+  FactoryGirl.define do
+    factory :user do
+      name "Stas"
+      email "stas@gmail.com"
+      password "abc123"
     end
   end
+
+  test_user = FactoryGirl.create(:user, name: "John", email: "Jonno" )
+
+  it "authentication succeeds with correct credentials" do
+    User.authentication(test_user.email, test_user.password).should_not == nil
+  end
+
+  it "authentication fails with incorrect credentials"
+
+  it "generates a password salt" do
+    test_user.password_salt.should_not be_empty
+  end
+
+  it "generates a password hash" do
+    test_user.password_hash.should_not be_empty
+  end
+
 end

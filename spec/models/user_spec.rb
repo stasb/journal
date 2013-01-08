@@ -13,22 +13,29 @@ describe User do
 
   context 'authentication' do
 
+    before(:each) do
+      @user = FactoryGirl.create(:user, :name => 'John', :email => 'john@gmail.com', :password => 'foo')
+    end
+
     it "authenticates with valid credentials" do
-      user = User.create!(:name => 'John', :email => 'john@gmail.com', :password => 'foo')
-      User.authenticate('john@gmail.com', 'foo').should == user
+      User.authenticate('john@gmail.com', 'foo').should == @user
     end
 
     it "doesn't authenticate with invalid credentials" do
-      user = User.create!(:name => 'John', :email => 'john@gmail.com', :password => 'foo')
       User.authenticate('john@gmail.com', 'incorrect').should be_nil
     end
 
 
-    it "generates the password salt"
+    it "generates the password salt" do
+      @user.password_salt.should_not be_empty
+    end
 
-    it "generates the password hash"
+    it "generates the password hash" do
+      @user.password_hash.should_not be_empty
+    end
 
   end
+
   # FactoryGirl.define do
   #   factory :user do
   #     name "Stas"

@@ -32,7 +32,7 @@ end
 
 gem "bcrypt-ruby", :require => "bcrypt"
 
-gem "factory_girl_rails", "~> 4.0"
+gem "factory_girl"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -21,10 +21,13 @@ describe User do
       User.authenticate('john@gmail.com', 'foo').should == @user
     end
 
-    it "doesn't authenticate with invalid credentials" do
-      User.authenticate('john@gmail.com', 'incorrect').should be_nil
+    it "doesn't authenticate with invalid email" do
+      User.authenticate('incorrect@gmail.com', 'foo').should be_nil
     end
 
+    it "doesn't authenticate with invalid password" do
+      User.authenticate('john@gmail.com', 'incorrect').should be_nil
+    end
 
     it "generates the password salt" do
       @user.password_salt.should_not be_empty
@@ -35,29 +38,5 @@ describe User do
     end
 
   end
-
-  # FactoryGirl.define do
-  #   factory :user do
-  #     name "Stas"
-  #     email "stas@gmail.com"
-  #     password "abc123"
-  #   end
-  # end
-
-  # test_user = FactoryGirl.create(:user, name: "John", email: "Jonno" )
-
-  # it "authentication succeeds with correct credentials" do
-  #   User.authentication(test_user.email, test_user.password).should_not == nil
-  # end
-
-  # it "authentication fails with incorrect credentials"
-
-  # it "generates a password salt" do
-  #   test_user.password_salt.should_not be_empty
-  # end
-
-  # it "generates a password hash" do
-  #   test_user.password_hash.should_not be_empty
-  # end
 
 end

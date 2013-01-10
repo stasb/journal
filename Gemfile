@@ -28,11 +28,14 @@ end
 
 group :test do
   gem "shoulda-matchers"
+  gem "factory_girl"
+  gem "capybara"
+  gem "guard-rspec"
+  gem "database_cleaner"
+  gem "faker"
 end
 
 gem "bcrypt-ruby", :require => "bcrypt"
-
-gem "factory_girl"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

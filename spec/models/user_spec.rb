@@ -11,7 +11,7 @@ describe User do
 
   it { should validate_uniqueness_of(:email) }
 
-  context 'authentication' do
+  describe 'authentication' do
 
     before(:each) do
       @user = FactoryGirl.create(:user, :name => 'John', :email => 'john@gmail.com', :password => 'foo')

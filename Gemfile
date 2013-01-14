@@ -34,6 +34,10 @@ gem "bcrypt-ruby", :require => "bcrypt"
 
 gem "factory_girl"
 
+group :development do
+  gem 'guard-rspec'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

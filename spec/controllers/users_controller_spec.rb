@@ -2,27 +2,44 @@ require 'spec_helper'
 
 describe UsersController do
 
-  def mock_user(stubs={})
-    @mock_user ||= mock_model(User, stubs).as_null_object
-  end
+  render_views
 
-  describe "POST #new" do
-    it "creates a blank user for editing" do
-      User.stub(:new) { [mock_user] }
+  describe "GET #new" do
+    subject { response }
+
+    before do
       get :new
-      assigns(:user).should eq([mock_user])
     end
+
+    it { should be_success }
+    it { should render_template(:new) }
   end
 
   describe "POST #create" do
     context "with valid attributes" do
-      it "saves the new user in the database"
-      it "redirects to the URL with a notice"
+      it "saves the new user in the database" do
+        expect {
+          post :create, user: FactoryGirl.attributes_for(:user)
+        }.to change{User.count}.by(1)
+      end
+      it "redirects to the URL with a flash notice" do
+        post :create, user: FactoryGirl.attributes_for(:user)
+        expect(response).to redirect_to(root_url)
+        flash[:notice].should eql("Signed up!")
+      end
     end
 
     context "with invalid attributes" do
-      it "does not save the user in the database"
-      it "redirects to the new form/page"
+      it "does not save the user in the database" do
+        expect {
+          post :create, user: FactoryGirl.attributes_for(:invalid_user)
+        }.to_not change{User.count}
+      end
+      it "redirects to the new form/page without a flash notice" do
+        post :create, user: FactoryGirl.attributes_for(:invalid_user)
+        expect(response).to render_template(:new)
+        flash[:notice].should be_nil
+      end
     end
   end
 end

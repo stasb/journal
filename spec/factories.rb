@@ -5,10 +5,8 @@ FactoryGirl.define do
     password "foo"
   end
 
-  factory :nil_user do
-    name nil
+  factory :invalid_user, parent: :user do
     email nil
-    password nil
   end
 end
 

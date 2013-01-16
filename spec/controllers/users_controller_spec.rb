@@ -11,8 +11,12 @@ describe UsersController do
       get :new
     end
 
-    it { should be_success }
     it { should render_template(:new) }
+
+    it "assigns a new User to @user" do
+      get :new
+      assigns(:user).should be_a_new(User)
+    end
   end
 
   describe "POST #create" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  it { should belong_to(:account) }
+  it { should have_one(:account) }
 
   it { should validate_confirmation_of(:password) }
 

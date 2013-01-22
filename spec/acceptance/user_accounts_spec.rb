@@ -14,17 +14,17 @@ feature 'User accounts' do
   end
 
   scenario 'Signing into an account with valid credentials' do
-    user = FactoryGirl.create(:user)
+    user = create(:user)
     visit '/log_in'
-    page.has_content?('Log in')
-    fill_in "Email", :with => user.email
-    fill_in "Password", :with => user.password
+    page.has_content?('log in')
+    fill_in "email", :with => user.email
+    fill_in "password", :with => user.password
     click_button('Save changes')
     page.should have_content 'Logged in!'
   end
 
   scenario 'Signing into an account with invalid credentials' do
-    user = FactoryGirl.create(:user)
+    user = create(:user)
     visit '/log_in'
     page.has_content?('Log in')
     fill_in "Email", :with => user.email
@@ -33,6 +33,15 @@ feature 'User accounts' do
     page.should have_content 'Invalid email or password'
   end
 
-  scenario 'Signing out of an account'
-
+  scenario 'Signing out of an account' do
+    user = create(:user)
+    visit '/log_in'
+    page.has_content?('log in')
+    fill_in "email", :with => user.email
+    fill_in "password", :with => user.password
+    click_button('Save changes')
+    page.should have_content 'Logged in!'
+    click_link('Log out')
+    page.should have_content 'Logged out!'
+  end
 end

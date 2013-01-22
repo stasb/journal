@@ -26,6 +26,16 @@ describe UsersController do
           post :create, user: FactoryGirl.attributes_for(:user)
         }.to change{User.count}.by(1)
       end
+      it "saves a corresponding account" do
+        expect {
+          post :create, user: FactoryGirl.attributes_for(:user)
+        }.to change{Account.count}.by(1)
+      end
+      it "saves an account with the correct details" do
+        post :create, user: FactoryGirl.attributes_for(:user)
+        Account.last.name.should eql(User.last.name)
+        Account.last.user_id.should eql(User.last.id)
+      end
       it "redirects to the URL with a flash notice" do
         post :create, user: FactoryGirl.attributes_for(:user)
         expect(response).to redirect_to(root_url)

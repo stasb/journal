@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :check_sign_in, :only => [:new, :create]
+
   def new
   end
 
@@ -6,7 +8,8 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
-      redirect_to root_url, :notice => "Logged in!"
+      @account = user.account
+      redirect_to account_projects_path(@account), :notice => "Logged in!"
     else
       flash.now.alert = "Invalid email or password"
       render "new"

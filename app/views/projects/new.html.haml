@@ -1,0 +1,15 @@
+%h1 New Project
+= form_for [@account, @project] do |f|
+  - if @project.errors.any?
+    .error_messages
+      %h2
+        Form is invalid
+        %h2
+          %ul
+            - for message in @project.errors.full_messages
+              %li = message
+  %p
+    = f.label :name
+    %br/
+    = f.text_field :name
+  %p.button= f.submit

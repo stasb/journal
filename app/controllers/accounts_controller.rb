@@ -1,11 +1,6 @@
 class AccountsController < ApplicationController
-  def new
-    @account = Account.new
+  def show
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @account = @current_user.account
   end
-
-  def create
-    @account = Account.new(params[:account])
-    @account.save
-  end
-
 end

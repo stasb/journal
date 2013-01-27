@@ -1,0 +1,10 @@
+%br
+= link_to "Create a project", new_account_project_path(@account)
+
+- if @projects.empty?
+  %p
+    You have no projects.
+- else
+  - @projects.each do |project|
+    %li
+      = link_to project.name, account_project_path(@account, project)

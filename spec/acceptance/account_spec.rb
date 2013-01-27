@@ -15,4 +15,17 @@ feature 'User accounts' do
     Account.last.user_id.should eql(User.last.id)
   end
 
+# scenario 'Viewing account information' do
+#   user = create(:user, name: 'test_name')
+#   account = create(:account, name: user.name, id: user.id)
+#   visit '/log_in'
+#   page.has_content?('log in')
+#   fill_in "email", :with => user.email
+#   fill_in "password", :with => user.password
+#   click_button('Save changes')
+#   page.should have_content 'Logged in!'
+#   click_link('Account Information')
+#   page.should have_content 'test_name'
+# end
+
 end

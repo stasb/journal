@@ -17,5 +17,4 @@ Journal::Application.routes.draw do
     resources :projects
   end
 
-  resources :projects
 end

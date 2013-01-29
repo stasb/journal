@@ -10,6 +10,6 @@
               %li = message
   %p
     = f.label :name
-    %br/
     = f.text_field :name
-  %p.button= f.submit
+  %p
+    = f.submit "Submit", :class => "btn btn-primary"

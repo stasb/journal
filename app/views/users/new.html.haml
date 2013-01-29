@@ -10,18 +10,15 @@
               %li= message
   %p
     = f.label :name
-    %br/
     = f.text_field :name
   %p
     = f.label :email
-    %br/
     = f.text_field :email
   %p
     = f.label :password
-    %br/
     = f.password_field :password
   %p
     = f.label :password_confirmation
-    %br/
     = f.password_field :password_confirmation
-  %p.button= f.submit
+  %p
+    = f.submit "Submit", :class => "btn btn-primary"

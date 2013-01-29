@@ -1,21 +1,36 @@
 !!!
 %html
   %head
-    %title Journal
-    = stylesheet_link_tag    "application", :media => "all"
+    %title= Journal
+    = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   %body
-    #user_nav
-      - if current_user
-        Logged in as #{current_user.email}
-        \#{link_to "Log out", log_out_path}
-        \#{link_to "Account Information", account_path}
-        = link_to "Back", account_projects_path(@account)
-      - else
-        = link_to "Sign up", sign_up_path
-        or
-        \#{link_to "log in", log_in_path}
+    .navbar.navbar-fixed-top.navbar-inverse
+      .navbar-inner
+        .container
+          %a.brand{:href => root_url} Journal
+          .nav-collapse.collapse
+            %ul.nav
+              - if current_user
+                %li
+                  %p.navbar-text
+                    Logged in as
+                    = current_user.email
+                %li
+                  = link_to "Log out", log_out_path
+                %li
+                  = link_to "Account Information", account_path
+                %li
+                  = link_to "Back", account_projects_path(@account)
+              - else
+                %li
+                  = link_to "Sign up", sign_up_path
+                %li
+                  = link_to "Log in", log_in_path
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}"
-    = yield
+    .container
+      = yield

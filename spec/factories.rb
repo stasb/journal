@@ -12,5 +12,9 @@ FactoryGirl.define do
   factory :account do
     name "John"
   end
+
+  factory :project do
+    name "Project"
+  end
 end
 

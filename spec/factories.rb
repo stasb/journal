@@ -1,8 +1,9 @@
 FactoryGirl.define do
   factory :user do
-    name "John"
-    email "john@gmail.com"
-    password "foo"
+    sequence(:name)  { |n| "Person #{n}" }
+    sequence(:email) { |n| "person_#{n}@example.com"}   
+    password "foobar"
+    password_confirmation "foobar"
   end
 
   factory :invalid_user, parent: :user do
@@ -10,11 +11,11 @@ FactoryGirl.define do
   end
 
   factory :account do
-    name "John"
+    sequence(:name)  { |n| "Person #{n}" }
   end
 
   factory :project do
-    name "Project"
+    sequence(:name)  { |n| "Person #{n}" }
   end
 end
 

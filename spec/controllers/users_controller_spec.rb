@@ -38,7 +38,7 @@ describe UsersController do
       end
       it "redirects to the URL with a flash notice" do
         post :create, user: FactoryGirl.attributes_for(:user)
-        expect(response).to redirect_to(root_url)
+        expect(response).to redirect_to(account_projects_path(Account.last))
         flash[:notice].should eql("Signed up!")
       end
     end

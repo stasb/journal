@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe SessionsController do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let!(:account) { FactoryGirl.create(:account) }
+  let!(:user) { FactoryGirl.create(:user, account: account) }
 
   describe "POST #create" do
 
@@ -12,8 +13,8 @@ describe SessionsController do
         post :create
       end
       it { should set_session(:user_id) }
-      it "redirects to the root URL with a notice" do
-        expect(response).to redirect_to(root_url)
+      it "redirects to the projects index page" do
+        expect(response).to redirect_to(account_projects_path(account))
         flash[:notice].should eq("Logged in!")
       end
     end
@@ -38,8 +39,7 @@ describe SessionsController do
     end
     it "redirects to the URL with a notice" do
       delete :destroy
-      expect(response).to redirect_to(root_url)
-      flash[:notice].should eq("Logged out!")
+      expect(response).to redirect_to(log_in_path)
     end
   end
 

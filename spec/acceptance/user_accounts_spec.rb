@@ -1,11 +1,13 @@
 require 'acceptance/acceptance_helper'
 
-feature 'User pages' do
+feature 'User pages', %q{
+Testing account creation and log in/out behavior
+} do
 
   let!(:account) { FactoryGirl.create(:account) }
   let!(:user) { FactoryGirl.create(:user, account: account) }
 
-  scenario 'Creating a new account' do
+  scenario 'Creating a new user' do
     visit "/sign_up"
     fill_in "Name", :with => "John"
     fill_in "Email", :with => "john@gmail.com"
@@ -39,6 +41,17 @@ feature 'User pages' do
     page.should have_content "Logged in!"
     click_link "Log out"
     page.should have_content "Logged out!"
+  end
+
+  scenario 'Viewing account information' do
+    visit "/log_in"
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with => user.password
+    click_button "Submit"
+    page.should have_content "Logged in!"
+    click_link "Account Information"
+    page.should have_content "Account Name"
+    page.should have_content account.name
   end
 
 end

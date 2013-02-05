@@ -29,6 +29,7 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'steak'
 end
 
 group :test do

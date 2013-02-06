@@ -26,5 +26,6 @@ class ProjectsController < ApplicationController
   def show
     @account = @current_user.account
     @project = Project.find(params[:id])
+    @entries = @project.entries.all
   end
 end

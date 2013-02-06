@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SessionsController do
+describe SessionController do
 
   let!(:account) { FactoryGirl.create(:account) }
   let!(:user) { FactoryGirl.create(:user, account: account) }

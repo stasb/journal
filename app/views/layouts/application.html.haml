@@ -24,13 +24,13 @@
                 %li
                   = link_to "Account Information", account_path
                 %li
-                  = link_to "Back", account_projects_path(@account)
+                  = link_to "Back", root_url
               - else
                 %li
                   = link_to "Sign up", sign_up_path
                 %li
                   = link_to "Log in", log_in_path
     - flash.each do |name, msg|
-      = content_tag :div, msg, :id => "flash_#{name}"
+      = content_tag :div, msg, :id => "flash_#{name}", :class => "alert container"
     .container
       = yield

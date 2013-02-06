@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionController < ApplicationController
   skip_before_filter :check_sign_in, :only => [:new, :create]
 
   def new

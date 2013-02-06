@@ -3,3 +3,13 @@
   %strong Project Name:
   %br
   = @project.name
+%li
+  = link_to 'New entry', new_project_entry_path(@project)
+
+- if @project.entries.empty?
+  %p
+    You have no journal entries.
+- else
+  - @project.entries.each do |entry|
+    %li
+      = link_to entry.title, project_entry_path(@project, entry)

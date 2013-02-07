@@ -1,13 +1,13 @@
 %h1 Sign Up
 = form_for @user do |f|
   - if @user.errors.any?
-    .error_messages
-      %h2
-        Form is invalid
-        %h2
-          %ul
+    .text-error
+      %p
+        Please fill in the required fields.
+        %p
+          %ul.text-error
             - for message in @user.errors.full_messages
-              %li= message
+              %li.text-error= message
   %p
     = f.label :name
     = f.text_field :name

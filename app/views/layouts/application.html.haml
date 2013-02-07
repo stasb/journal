@@ -24,13 +24,16 @@
                 %li
                   = link_to "Account Information", account_path
                 %li
-                  = link_to "Back", root_url
+                  = link_to "Home", root_url
               - else
                 %li
                   = link_to "Sign up", sign_up_path
                 %li
                   = link_to "Log in", log_in_path
     - flash.each do |name, msg|
-      = content_tag :div, msg, :id => "flash_#{name}", :class => "alert container"
+      - if notice
+        = content_tag :div, msg, :id => "flash_#{name}", :class => "container alert alert-success"
+      - else
+        = content_tag :div, msg, :id => "flash_#{name}", :class => "container alert alert-error"
     .container
       = yield

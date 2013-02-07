@@ -15,7 +15,7 @@ project information displayed on a show page
     click_link "Create a project"
     page.should have_content "New Project"
     fill_in "project_name", with: "Test name project"
-    click_button "Submit"
+    click_button "Create"
     page.should have_content "Test name project"
   end
 
@@ -24,7 +24,7 @@ project information displayed on a show page
     click_link "Create a project"
     page.should have_content "New Project"
     fill_in "project_name", with: "Test name project"
-    click_button "Submit"
+    click_button "Create"
     page.should have_content "Test name project"
     click_link "Test name project"
     page.should have_content "Project Information"

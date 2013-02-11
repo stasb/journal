@@ -1,0 +1,22 @@
+- @projects.each do |project|
+  .something
+    = link_to project.name, account_project_path(@account, project), :class => "btn btn-info"
+    %p.btn.disabled
+      %small
+        = pluralize(project.entries.count, 'entry')
+    %a.btn{:href => new_project_entry_path(project)}
+      %i.icon-plus
+      add
+  %br
+  - entries = project.entries.limit(3).order("created_at DESC")
+  - entries.each do |entry|
+    .entry-preview.well.well-small
+      %a.bottom-spacer{:href => project_entry_path(project, entry)}
+        = entry.title
+        |
+        = truncate(entry.body, :length => 90)
+      %span.label{:style => "margin-left: 10px;"}
+        created
+        = time_ago_in_words(entry.created_at)
+        ago
+        %br

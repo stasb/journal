@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
 
   def index
     @account = @current_user.account
-    @projects = @account.projects.all
+    @projects = @account.projects.order("created_at DESC").all
   end
 
   def destroy

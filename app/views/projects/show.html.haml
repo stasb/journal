@@ -11,11 +11,11 @@
 - else
   - entries = @project.entries.order("created_at DESC")
   - entries.each do |entry|
-    .entry-preview
+    .entry-preview.well.well-small
       %a.bottom-spacer{:href => project_entry_path(@project, entry)}
         = entry.title
         |
-        = truncate(entry.body, :length => 60)
+        = truncate(entry.body, :length => 90)
       %span.label{:style => "margin-left: 10px;"}
         created
         = time_ago_in_words(entry.created_at)

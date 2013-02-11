@@ -8,22 +8,4 @@
 - else
   %h1 Projects
   %br
-  - @projects.each do |project|
-    .btn-toobar
-      = link_to project.name, account_project_path(@account, project), :class => "btn"
-      %p.btn.disabled
-        %small
-          = pluralize(project.entries.count, 'entry')
-    %br
-    - entries = project.entries.limit(3).order("created_at DESC")
-    - entries.each do |entry|
-      .entry-preview
-        %a.bottom-spacer{:href => project_entry_path(project, entry)}
-          = entry.title
-          |
-          = truncate(entry.body, :length => 60)
-        %span.label{:style => "margin-left: 10px;"}
-          created
-          = time_ago_in_words(entry.created_at)
-          ago
-          %br
+  = render "project_entries"

@@ -11,7 +11,7 @@
   |
   %span
   = link_to 'edit entry', edit_project_entry_path(@project, @entry), :class => "text-success"
-%p
+%p.well
   = @entry.body
 %p
   = link_to 'Back', :back, :class => "muted"

@@ -1,15 +1,25 @@
-%h1 Project Information
-%p
-  %strong Project Name:
-  %br
-  = @project.name
-%li
-  = link_to 'New entry', new_project_entry_path(@project)
-
+%h1=@project.name
+%p.muted
+  = link_to 'delete project', @project, :method => :delete, :class => "text-error"
+  |
+  %span
+  = link_to 'edit project', edit_account_project_path(@account, @project), :class => "text-success"
+= button_to "New entry", new_project_entry_path(@project), :method => "get", :class => "btn btn-large btn-success"
 - if @project.entries.empty?
   %p
     You have no journal entries.
 - else
-  - @project.entries.each do |entry|
-    %li
-      = link_to entry.title, project_entry_path(@project, entry)
+  - entries = @project.entries.order("created_at DESC")
+  - entries.each do |entry|
+    .entry-preview
+      %a.bottom-spacer{:href => project_entry_path(@project, entry)}
+        = entry.title
+        |
+        = truncate(entry.body, :length => 60)
+      %span.label{:style => "margin-left: 10px;"}
+        created
+        = time_ago_in_words(entry.created_at)
+        ago
+        %br
+%p
+  = link_to 'Back', root_url, :class => "muted"

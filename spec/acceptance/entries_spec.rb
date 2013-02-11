@@ -31,6 +31,14 @@ and viewed as a list on the project view page
     page.should have_content project.name
   end
 
+  scenario 'deleting an existing entry' do
+    log_in user
+    click_link project.name
+    click_link e1.title
+    click_link 'delete entry'
+    page.should have_content 'Entry deleted.'
+  end
+
   scenario 'show a specific entry' do
     log_in user
     click_link project.name

@@ -1,4 +1,17 @@
 %h1
   = @entry.title
+%span.label
+  created
+  = time_ago_in_words(@entry.created_at)
+  ago
+%br
+%br
+%p.muted
+  = link_to 'delete entry', [@project, @entry], :method => :delete, :class => "text-error"
+  |
+  %span
+  = link_to 'edit entry', edit_project_entry_path(@project, @entry), :class => "text-success"
 %p
   = @entry.body
+%p
+  = link_to 'Back', :back, :class => "muted"

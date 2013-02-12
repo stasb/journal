@@ -36,7 +36,6 @@ project information displayed on a show page
     click_button "Create"
     page.should have_content "Test name project"
     click_link "Test name project"
-    page.should have_content "Project Information"
     page.should have_content "Test name project"
   end
 
@@ -49,6 +48,15 @@ project information displayed on a show page
   scenario 'show entry count next to each project' do
     log_in user
     page.should have_content "2 entries"
+  end
+
+  scenario 'editing an existing project' do
+    log_in user
+    visit account_project_path(account, p1)
+    click_link 'edit project'
+    fill_in "project_name", with: "Changed project name"
+    click_button "Create"
+    page.should have_content "Changed project name"
   end
 
 end

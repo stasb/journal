@@ -22,8 +22,7 @@ and viewed as a list on the project view page
   scenario 'creating a new entry' do
     log_in user
     click_link project.name
-    page.should have_content "New entry"
-    click_link "New entry"
+    click_button "New entry"
     fill_in "entry_title", with: "This is a title"
     fill_in "entry_body", with: "some body text"
     click_button "Submit"
@@ -45,6 +44,15 @@ and viewed as a list on the project view page
     click_link e1.title
     page.should have_content e1.title
     page.should have_content e1.body
+  end
+
+  scenario 'editing a specific entry' do
+    log_in user
+    visit project_entry_path(project, e1)
+    click_link 'edit entry'
+    fill_in "entry_title", with: "Changed entry."
+    click_button "Submit"
+    page.should have_content "Changed entry."
   end
 
 end

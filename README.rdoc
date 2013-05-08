@@ -1,6 +1,6 @@
 == Journal - App Demo
 
-This is my first completed CRUD appliation, which allows the simple recording of journal entries. Users can create
+This is my first completed CRUD application, which allows the simple recording of journal entries. Users can create
 an account, enter projects, and create entries under each project. The application uses SQlite and Twitter Bootstrap,
 as well as RSpec tests at model, controller, and integration levels.
 
